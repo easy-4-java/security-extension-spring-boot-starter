@@ -499,7 +499,7 @@
         
         <fastjson2.version>2.0.53</fastjson2.version>
         <jwt-issuer.version>3.0.x.20260630-SNAPSHOT</jwt-issuer.version>
-        <spring-biz.version>3.0.x.20260630-SNAPSHOT</spring-biz.version>
+        <spring-extension.version>3.0.x.20260630-SNAPSHOT</spring-extension.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-io.version>2.16.1</commons-io.version>
         <swagger.version>1.6.2</swagger.version>
@@ -537,11 +537,11 @@
                 <version>${jwt-issuer.version}</version>
             </dependency>
             
-            <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-biz -->
+            <!-- Source: https://github.com/easy-4-java/spring-extension — easy4j spring-extension -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>spring-enhance</artifactId>
-                <version>${spring-biz.version}</version>
+                <artifactId>spring-extension</artifactId>
+                <version>${spring-extension.version}</version>
             </dependency>
                 <dependency>
             <groupId>org.slf4j</groupId>
@@ -633,10 +633,10 @@
             <artifactId>fastjson2</artifactId>
         </dependency>
 
-        <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-biz -->
+        <!-- Source: https://github.com/easy-4-java/spring-extension — easy4j spring-extension -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>spring-enhance</artifactId>
+            <artifactId>spring-extension</artifactId>
         </dependency>
         <!-- Source: https://github.com/easy-4-java/jwt-issuer-api — easy4j jwt-issuer-api -->
         <dependency>

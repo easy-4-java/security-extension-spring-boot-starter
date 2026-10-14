@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hitool.core.lang3.time.DateFormats;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.biz.web.servlet.i18n.LocaleContextFilter;
+import org.springframework.extension.web.servlet.i18n.LocaleContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

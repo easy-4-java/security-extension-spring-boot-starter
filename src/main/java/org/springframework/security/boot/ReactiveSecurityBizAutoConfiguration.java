@@ -1,8 +1,8 @@
 package org.springframework.security.boot;
 
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.biz.web.server.ReactiveLocaleContextFilter;
-import org.springframework.biz.web.server.ReactiveRequestContextFilter;
+import org.springframework.extension.web.server.ReactiveLocaleContextFilter;
+import org.springframework.extension.web.server.ReactiveRequestContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
