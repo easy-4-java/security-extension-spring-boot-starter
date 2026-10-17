@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.security.autoconfigure.web.reactive.ReactiveWebSecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 @Configuration
-@AutoConfigureBefore(ReactiveWebSecurityAutoConfiguration.class)
+@AutoConfigureBefore(ReactiveSecurityAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnClass(DefaultAuthenticationEventPublisher.class)
 public class ReactiveSecurityBizAutoConfiguration {

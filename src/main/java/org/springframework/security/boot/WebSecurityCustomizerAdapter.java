@@ -25,7 +25,6 @@ import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.boot.biz.CustomWebSecurityExpressionHandler;
 import org.springframework.security.boot.biz.property.SecurityHeaderCorsProperties;
 import org.springframework.security.boot.biz.property.SecurityHeaderCsrfProperties;
 import org.springframework.security.boot.biz.property.SecurityHeadersProperties;
@@ -39,6 +38,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.web.access.expression.DefaultHttpSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.util.CollectionUtils;
@@ -380,10 +380,10 @@ public abstract class WebSecurityCustomizerAdapter implements WebSecurityCustomi
 	}
 
 	/**
-	 * @return a {@link CustomWebSecurityExpressionHandler} for SpEL-based access rules.
+	 * @return the HTTP request expression handler for SpEL-based access rules.
 	 */
 	public SecurityExpressionHandler<RequestAuthorizationContext> customWebSecurityExpressionHandler() {
-		return new CustomWebSecurityExpressionHandler();
+		return new DefaultHttpSecurityExpressionHandler();
 	}
 
 	/**

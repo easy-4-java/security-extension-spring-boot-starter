@@ -21,7 +21,7 @@ import org.springframework.security.boot.utils.StringUtils;
 import org.springframework.security.boot.utils.WebUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
@@ -61,7 +61,7 @@ public class PostRequestAuthenticationProcessingFilter extends PostOnlyAuthentic
 	// ===================================================================================================
 	
 	public PostRequestAuthenticationProcessingFilter(ObjectMapper objectMapper) {
-		super(PathPatternRequestMatcher.pathPattern("/login"));
+		super(new AntPathRequestMatcher("/login"));
 		this.objectMapper = objectMapper;
 	}
 
