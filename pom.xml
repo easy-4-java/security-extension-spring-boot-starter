@@ -476,7 +476,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <fastjson2.version>2.0.52</fastjson2.version>
         <jwt-issuer.version>1.0.x.20260630-SNAPSHOT</jwt-issuer.version>
-        <spring-biz.version>1.0.x.20260630-SNAPSHOT</spring-biz.version>
+        <spring-security.version>5.8.14</spring-security.version>
+        <spring-security-extension.version>1.0.x.20260630-SNAPSHOT</spring-security-extension.version>
+        <spring-extension.version>1.0.x.20260630-SNAPSHOT</spring-extension.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <maven.version>3.0</maven.version>
            <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
@@ -519,8 +521,13 @@
             <!-- https://mvnrepository.com/artifact/io.github.hiwepy/spring-biz -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>spring-enhance</artifactId>
-                <version>${spring-biz.version}</version>
+                <artifactId>spring-security-extension</artifactId>
+                <version>${spring-security-extension.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.easy4j</groupId>
+                <artifactId>spring-extension</artifactId>
+                <version>${spring-extension.version}</version>
             </dependency>
                 <dependency>
             <groupId>javax.servlet</groupId>
@@ -631,10 +638,14 @@
             <artifactId>fastjson2</artifactId>
         </dependency>
 
-        <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-biz -->
+        <!-- Source: https://github.com/easy-4-java/spring-extension — easy4j spring-extension -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>spring-enhance</artifactId>
+            <artifactId>spring-security-extension</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.easy4j</groupId>
+            <artifactId>spring-extension</artifactId>
         </dependency>
         <!-- Source: https://github.com/easy-4-java/jwt-issuer-api — easy4j jwt-issuer-api -->
         <dependency>
@@ -720,6 +731,11 @@
             <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

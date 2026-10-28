@@ -15,7 +15,7 @@
  */
 package org.springframework.security.boot.biz.property;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

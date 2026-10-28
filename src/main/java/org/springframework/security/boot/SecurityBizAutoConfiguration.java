@@ -3,14 +3,15 @@ package org.springframework.security.boot;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hitool.core.lang3.time.DateFormats;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.biz.web.servlet.i18n.LocaleContextFilter;
+import org.springframework.extension.web.servlet.i18n.LocaleContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -175,6 +176,7 @@ public class SecurityBizAutoConfiguration {
 	 */
     @Bean
 	@ConditionalOnMissingBean
+	@ConditionalOnBean(AuthenticationProvider.class)
 	protected AuthenticationManager authenticationManager(ObjectProvider<AuthenticationProvider> authenticationProvider) {
     	ProviderManager authenticationManager = new ProviderManager(authenticationProvider.stream().collect(Collectors.toList()));
 		authenticationManager.setEraseCredentialsAfterAuthentication(false);
