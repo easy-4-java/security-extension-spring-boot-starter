@@ -3,6 +3,7 @@ package org.springframework.security.boot.biz;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
 import org.springframework.security.web.access.expression.WebSecurityExpressionRoot;
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
 
@@ -17,6 +18,11 @@ public class CustomWebSecurityExpressionRoot  extends WebSecurityExpressionRoot 
     public CustomWebSecurityExpressionRoot(Authentication a, FilterInvocation fi) {
         super(a, fi);
         this.request = fi.getRequest();
+    }
+
+    public CustomWebSecurityExpressionRoot(Authentication authentication, RequestAuthorizationContext context) {
+        super(() -> authentication, context.getRequest());
+        this.request = context.getRequest();
     }
 
     /**
