@@ -1,13 +1,13 @@
 package org.springframework.security.boot;
 
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.biz.web.server.ReactiveLocaleContextFilter;
-import org.springframework.biz.web.server.ReactiveRequestContextFilter;
+import org.springframework.extension.web.server.ReactiveLocaleContextFilter;
+import org.springframework.extension.web.server.ReactiveRequestContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.security.autoconfigure.web.reactive.ReactiveWebSecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -30,14 +30,14 @@ import java.util.stream.Collectors;
  * Registers the common reactive security infrastructure beans: locale/context
  * filters, matched authentication entry points, success/failure handlers,
  * access-denied handler and logout success handler. Runs before Spring Boot's
- * {@link ReactiveWebSecurityAutoConfiguration} and only takes effect in
+ * {@link ReactiveSecurityAutoConfiguration} and only takes effect in
  * reactive web applications.</p>
  *
  * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Configuration
-@AutoConfigureBefore(ReactiveWebSecurityAutoConfiguration.class)
+@AutoConfigureBefore(ReactiveSecurityAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnClass(DefaultAuthenticationEventPublisher.class)
 public class ReactiveSecurityBizAutoConfiguration {
