@@ -1,6 +1,7 @@
 package org.springframework.security.boot.utils;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.boot.biz.utils.SubjectUtils;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

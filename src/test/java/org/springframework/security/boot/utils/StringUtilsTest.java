@@ -1,6 +1,7 @@
 package org.springframework.security.boot.utils;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.boot.biz.utils.StringUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -5,13 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hitool.core.lang3.time.DateFormats;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.biz.web.servlet.i18n.LocaleContextFilter;
+import org.springframework.extension.web.servlet.i18n.LocaleContextFilter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.security.autoconfigure.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -71,8 +73,15 @@ import java.util.stream.Collectors;
 @AutoConfigureBefore(SecurityAutoConfiguration.class)
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @ConditionalOnClass(DefaultAuthenticationEventPublisher.class)
-@EnableConfigurationProperties({ SecurityBizProperties.class, SecuritySessionMgtProperties.class })
+@EnableConfigurationProperties(SecurityBizProperties.class)
 public class SecurityBizAutoConfiguration {
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConfigurationProperties(prefix = SecuritySessionMgtProperties.PREFIX)
+	public SecuritySessionMgtProperties securitySessionMgtProperties() {
+		return new SecuritySessionMgtProperties();
+	}
 
 	/**
 	 * @return the {@link org.springframework.security.web.authentication.WebAuthenticationDetailsSource}
@@ -175,6 +184,7 @@ public class SecurityBizAutoConfiguration {
 	 */
     @Bean
 	@ConditionalOnMissingBean
+	@ConditionalOnBean(AuthenticationProvider.class)
 	protected AuthenticationManager authenticationManager(ObjectProvider<AuthenticationProvider> authenticationProvider) {
     	ProviderManager authenticationManager = new ProviderManager(authenticationProvider.stream().collect(Collectors.toList()));
 		authenticationManager.setEraseCredentialsAfterAuthentication(false);

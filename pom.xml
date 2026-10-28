@@ -12,11 +12,11 @@
     </parent>
 
     <groupId>io.github.easy4j</groupId>
-    <artifactId>security-extension-spring-boot-starter</artifactId>
+    <artifactId>security-biz-spring-boot-starter</artifactId>
     <version>4.1.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Spring Boot Starter For Spring Security Extension</description>
+    <description>Spring Boot Starter For Spring Security Biz</description>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
 
     <!-- 开源协议采用 Apache 2.0 协议 -->
@@ -30,11 +30,8 @@
     <!-- 源码仓库（SCM）信息 -->
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
-
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
-
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
-
         <tag>${project.artifactId}</tag>
     </scm>
 
@@ -117,10 +114,10 @@
                 <artifactId>jwt-issuer-api</artifactId>
                 <version>${jwt-issuer.version}</version>
             </dependency>
-            <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-enhance -->
+            <!-- Source: https://github.com/easy-4-java/spring-extension — easy4j spring-extension -->
             <dependency>
                 <groupId>io.github.easy4j</groupId>
-                <artifactId>spring-enhance</artifactId>
+                <artifactId>spring-extension</artifactId>
                 <version>${spring-security-extension.version}</version>
             </dependency>
             <dependency>
@@ -209,10 +206,10 @@
             <artifactId>fastjson2</artifactId>
         </dependency>
 
-        <!-- Source: https://github.com/easy-4-java/spring-enhance — easy4j spring-enhance -->
+        <!-- Source: https://github.com/easy-4-java/spring-extension — easy4j spring-extension -->
         <dependency>
             <groupId>io.github.easy4j</groupId>
-            <artifactId>spring-enhance</artifactId>
+            <artifactId>spring-extension</artifactId>
         </dependency>
 
         <!-- Source: https://github.com/easy-4-java/spring-security-extension — easy4j spring-security-extension -->

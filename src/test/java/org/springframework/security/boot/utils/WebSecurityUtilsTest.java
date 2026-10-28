@@ -1,6 +1,7 @@
 package org.springframework.security.boot.utils;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.security.boot.biz.utils.WebSecurityUtils;
 import org.springframework.security.boot.biz.authentication.*;
 import org.springframework.security.boot.biz.authentication.nested.MatchedAuthenticationEntryPoint;
 import org.springframework.security.boot.biz.authentication.nested.MatchedAuthenticationFailureHandler;

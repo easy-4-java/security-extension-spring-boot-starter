@@ -2,6 +2,8 @@ package org.springframework.security.boot.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.boot.biz.utils.SecurityResponseUtils;
+import org.springframework.security.boot.biz.utils.WebUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockHttpServletRequest;
