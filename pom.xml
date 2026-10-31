@@ -429,7 +429,7 @@
             </dependency>
             <!-- Source: https://github.com/easy-4-java/jwt-issuer-api — easy4j jwt-issuer-api -->
             <dependency>
-                <groupId>io.github.hiwepy</groupId>
+                <groupId>com.github.hiwepy</groupId>
                 <artifactId>jwt-issuer-api</artifactId>
                 <version>${jwt-issuer.version}</version>
             </dependency>
@@ -536,7 +536,7 @@
         </dependency>
         <!-- Source: https://github.com/easy-4-java/jwt-issuer-api — easy4j jwt-issuer-api -->
         <dependency>
-            <groupId>io.github.hiwepy</groupId>
+            <groupId>com.github.hiwepy</groupId>
             <artifactId>jwt-issuer-api</artifactId>
         </dependency>
 
