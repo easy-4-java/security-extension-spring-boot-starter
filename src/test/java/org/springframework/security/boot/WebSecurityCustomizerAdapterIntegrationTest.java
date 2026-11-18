@@ -8,22 +8,30 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.WebApplicationContextRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.boot.biz.property.SecuritySessionMgtProperties;
+import org.springframework.security.boot.biz.property.SecurityHeaderCorsProperties;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /** Exercises adapter URL rules through a Spring Security filter chain. */
 class WebSecurityCustomizerAdapterIntegrationTest {
@@ -71,6 +79,42 @@ class WebSecurityCustomizerAdapterIntegrationTest {
             });
     }
 
+    @Test
+    void corsConfigurationMatchesConfiguredPathAndOrigin() {
+        SecurityHeaderCorsProperties cors = new SecurityHeaderCorsProperties();
+        CorsConfiguration allowed = new CorsConfiguration();
+        allowed.addAllowedOrigin("https://example.org");
+        cors.setCorsConfigurations(Map.of("/api/**", allowed));
+        TestAdapter adapter = new TestAdapter(new SecurityBizProperties());
+        CorsConfigurationSource source = adapter.corsSource(cors);
+
+        MockHttpServletRequest matching = new MockHttpServletRequest("GET", "/api/items");
+        matching.setServletPath("/api/items");
+        assertThat(source.getCorsConfiguration(matching)).isSameAs(allowed);
+
+        MockHttpServletRequest other = new MockHttpServletRequest("GET", "/other");
+        other.setServletPath("/other");
+        assertThat(source.getCorsConfiguration(other)).isNull();
+    }
+
+    @Test
+    void anonymousPathsAndOptionsRequestsBypassTheSecurityChain() {
+        SecurityBizProperties properties = new SecurityBizProperties();
+        LinkedHashMap<String, String> rules = new LinkedHashMap<>();
+        rules.put("/public", "anon");
+        rules.put("/health", "anon");
+        rules.put("/admin", "roles[admin]");
+        properties.setFilterChainDefinitionMap(rules);
+        TestAdapter adapter = new TestAdapter(properties);
+        WebSecurity web = mock(WebSecurity.class, RETURNS_DEEP_STUBS);
+
+        adapter.customize(web);
+
+        verify(web.ignoring()).requestMatchers("/public", "/health");
+        verify(web.ignoring().requestMatchers("/public", "/health"))
+            .requestMatchers(HttpMethod.OPTIONS, "/**");
+    }
+
     private static void assertRule(String rule, String allowedAuthority, String deniedAuthority) {
         SecurityBizProperties properties = new SecurityBizProperties();
         properties.setFilterChainDefinitionMap(new LinkedHashMap<>(Map.of("/admin", rule)));
@@ -98,6 +142,16 @@ class WebSecurityCustomizerAdapterIntegrationTest {
                 properties, new SecuritySessionMgtProperties(), List.of()) { };
             adapter.configure(http);
             return http.build();
+        }
+    }
+
+    private static final class TestAdapter extends WebSecurityCustomizerAdapter {
+        private TestAdapter(SecurityBizProperties properties) {
+            super(properties, new SecuritySessionMgtProperties(), List.of());
+        }
+
+        private CorsConfigurationSource corsSource(SecurityHeaderCorsProperties cors) {
+            return configurationSource(cors);
         }
     }
 
