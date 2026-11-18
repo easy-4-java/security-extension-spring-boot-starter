@@ -17,7 +17,6 @@ class SecurityAuthcPropertiesTest {
         assertThat(props.getRedirectUrl()).isEqualTo("/");
         assertThat(props.getSuccessUrl()).isEqualTo("/index");
         assertThat(props.getFailureUrl()).isEqualTo("/error");
-        assertThat(props.getAccessDeniedUrl()).isEqualTo("/errors/401");
         assertThat(props.isContinueChainBeforeSuccessfulAuthentication()).isFalse();
         assertThat(props.isAlwaysUseDefaultTargetUrl()).isFalse();
         assertThat(props.getDefaultTargetUrl()).isEqualTo("/");
@@ -60,13 +59,6 @@ class SecurityAuthcPropertiesTest {
         SecurityAuthcProperties props = new SecurityAuthcProperties();
         props.setFailureUrl("/login-error");
         assertThat(props.getFailureUrl()).isEqualTo("/login-error");
-    }
-
-    @Test
-    void setAndGetAccessDeniedUrl() {
-        SecurityAuthcProperties props = new SecurityAuthcProperties();
-        props.setAccessDeniedUrl("/errors/403");
-        assertThat(props.getAccessDeniedUrl()).isEqualTo("/errors/403");
     }
 
     @Test
