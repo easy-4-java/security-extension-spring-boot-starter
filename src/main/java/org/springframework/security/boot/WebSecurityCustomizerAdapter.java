@@ -323,7 +323,7 @@ public abstract class WebSecurityCustomizerAdapter implements WebSecurityCustomi
 
 				List<String> antPatterns = groupingMap.get(key.toString()).stream().map(Entry::getKey).collect(Collectors.toList());
 				// 角色
-				String[] roles = StringUtils.split(rolesMatcher.group(1), ",");
+				String[] roles = StringUtils.tokenizeToStringArray(rolesMatcher.group(1), ",");
 				if (ArrayUtils.isNotEmpty(roles)) {
 					if (roles.length > 1) {
 						// 如果用户具备给定角色中的某一个的话，就允许访问
@@ -344,7 +344,7 @@ public abstract class WebSecurityCustomizerAdapter implements WebSecurityCustomi
 
 				List<String> antPatterns = groupingMap.get(key.toString()).stream().map(Entry::getKey).collect(Collectors.toList());
 				// 权限标记
-				String[] perms = StringUtils.split(permsMatcher.group(1), ",");
+				String[] perms = StringUtils.tokenizeToStringArray(permsMatcher.group(1), ",");
 				if (ArrayUtils.isNotEmpty(perms)) {
 					if (perms.length > 1) {
 						// 如果用户具备给定全权限的某一个的话，就允许访问
